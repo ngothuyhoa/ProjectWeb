@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="panel-footer" style="width: 960px ;margin-right: 10px" >
+<div class="panel-footer" style="width: 960px " >
   <?
                                         function checked($value, $v_compare){
                                           $rs='';
@@ -22,11 +22,11 @@
           {{ csrf_field() }}
 
       </form>
-                  <table class="table" style="text-align: center" style="width: 900px ;table-layout: fixed;" >
+                  <table class="table" style="text-align: center" style="width: 950px ;table-layout: fixed;" >
                     <thead class="thead-inverse" style="background-color:black; color:white">
                             
                         <tr>
-                            <td style="text-align:center">STT</td>
+                            <td style="text-align:center">ID</td>
                             <td style="text-align:center">Họ tên</td>
                             <td style="text-align:center">Mã SV</td>
                             <td style="text-align:center">Lớp</td>
@@ -48,9 +48,9 @@
                      <form action="/admin/sua_da/{{$da->id}}" method="post">
                          <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <tr>
-                            <td><?php echo ++$i;?></td>
+                            <td>{{$da->id}}</td>
                              <td> {{$da->ten}}</td>
-                             <td><input type="text" name="msv" value="{{$da->ma_sv}}" style="width: 50px ;background: #F8F8FF ;border: 0px"></td>
+                             <td><input type="text" name="msv" value="{{$da->ma_sv}}" style="width: 40px ;background: #F8F8FF ;border: 0px"></td>
                             <td>{{$da->lop}}</td>
                             <td>{{$da->khoa}}</td>
                             <td>
@@ -60,7 +60,7 @@
                              
                             </td>
                             <td>{{$da->gvhd}}</td>
-                            <td><input type="text" name="mgv" value="{{$da->ma_gv}}" style="width: 50px ;background: #F8F8FF ;border: 0px"></td>
+                            <td><input type="text" name="mgv" value="{{$da->ma_gv}}" style="width: 40px ;background: #F8F8FF ;border: 0px"></td>
                             <td><select  id="" name="bomon" style="width:55px;background: #F8F8FF ;border: 0px ;padding: 0px;margin-top: 0px" >
                                     @foreach($bomon as $bm)
                                      <option <?php echo checked($bm->ten_bo_mon_viet_tat,$da->ten_viet_tat); ?>>{{$bm->ten_bo_mon_viet_tat}}</option>
@@ -72,14 +72,15 @@
                                  @endforeach
                              </select></td>
                             <td><input type="text" name="hoc_ky" value="{{$da->hoc_ky}}" style="width: 40px ;background: #F8F8FF ;border: 0px"></td>
-                            <td><input type="text" name="diem" value="{{$da->diem}}" style="width: 20px; text-align: center;background: #F8F8FF ;border: 0px"></td>
-                            <td><a href="/admin/file_bao_cao/{{$da->id}}">File: {{$da->file_bao_cao}}</a></td>
+                            <td><input type="text" name="diem" value="{{$da->diem}}" style="width: 10px; text-align: center;background: #F8F8FF ;border: 0px"></td>
+                            <td style="width: 50px"> <a href="/admin/file_bao_cao/{{$da->id}}">File: {{$da->file_bao_cao}}</a></td>
                             <td>
                               
                                 <input type="submit" name="sua" value="Sua">
                                 {{ csrf_field() }}
                               </form>
-                              <form>
+                              <form action="/admin/xoa_da/{{$da->id}}" method="post">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                               <input type="submit" name="Xoa" value="Xoa" style="margin-top: 10px">
                               </form>
                               

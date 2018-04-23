@@ -1,7 +1,7 @@
 @extends('admin.layout.home_admin')
 @section('content')
 <div class="panel-footer" style="width: 960px ;margin-right: 10px" >
-      <h3 style="text-align:center">Danh Sách Sinh Viên  </h3>
+      <h3 style="text-align:center">Danh Sách Bộ Môn  </h3>
       <form action="/admin/danh_sach_bo_mon/them_bm" method="post">
         <input type="submit" name="Them" value="Them" style="float: right ;margin-bottom:10px ">  
           {{ csrf_field() }}

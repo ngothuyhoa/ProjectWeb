@@ -6,7 +6,7 @@
             <p>{{ session('success') }}</p>
          </div>
   @endif 
-      <h3 style="text-align:center">Danh Sách Sinh Viên  </h3>
+      <h3 style="text-align:center">Danh Sách Loại Đồ Án  </h3>
       <form action="/admin/danh_sach_loai_do_an/them_lda" method="post">
         <input type="submit" name="Them" value="Them" style="float: right ;margin-bottom:10px ">  
           {{ csrf_field() }}

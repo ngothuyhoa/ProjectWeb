@@ -21,7 +21,7 @@
                     <input class="form-control" type="password" name="xac_nhan" placeholder="Please Enter password" required/>
                 </div>
              	
-           	 	<input style="margin-left: 155px" type="submit" name="Save" value="Check">
+           	 	<input style="margin-left: 155px" type="submit" name="Save" value="Save">
             	</form> 
            		 <form action="/admin/home_admin" method="get">
                <input style="margin-left: 155px; margin-top: 10px" type="submit" name="" value="Back">  

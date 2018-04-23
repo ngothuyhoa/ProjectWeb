@@ -22,6 +22,7 @@ class admin_thong_tin_gvController extends Controller
      	$giangvien=GiangVien::paginate(5);
      	foreach ($giangvien as $gv) {
             $gv->tenbomon = BoMon::find($gv->id_bo_mon)->ten_bo_mon;
+            $gv->ten_viet_tat = BoMon::find($gv->id_bo_mon)->ten_bo_mon_viet_tat;
         }
     	return view('admin.giang_vien.danh_sach_gv',['bomon'=>$bomon,'giangvien'=>$giangvien,'admin'=>$admin,'loaidoan'=>$loaidoan,'dem'=>$dem]);
     }
@@ -35,6 +36,7 @@ class admin_thong_tin_gvController extends Controller
         $giangvien=GiangVien::paginate(5);
         foreach ($giangvien as $gv) {
             $gv->tenbomon = BoMon::find($gv->id_bo_mon)->ten_bo_mon;
+            $gv->ten_viet_tat = BoMon::find($gv->id_bo_mon)->ten_bo_mon_viet_tat;
         }
         return view('admin.giang_vien.danh_sach_gv',['bomon'=>$bomon,'giangvien'=>$giangvien,'admin'=>$admin,'loaidoan'=>$loaidoan,'dem'=>$dem]);
     }
@@ -90,16 +92,6 @@ class admin_thong_tin_gvController extends Controller
     
 }
 
-	public function suagv($user_name){
-        $dem=NguyenVongDoAn::all()->count();
-        $a= Session::get('ten');
-        $admin= Admin::where('user_name',$a)->first();
-        $bomon=BoMon::all();
-        $loaidoan=LoaiDoAn::all();
-        $giangviena =GiangVien::where('user_name',$user_name)->first();
-        return view('admin.giang_vien.sua_giang_vien',['bomon'=>$bomon,'giangviena'=>$giangviena,'admin'=>$admin,'loaidoan'=>$loaidoan,'dem'=>$dem]);
-    }
-
     public function sua(Request $request,$user_name){
         $a= Session::get('ten');
         $admin= Admin::where('user_name',$a)->first();
@@ -115,7 +107,7 @@ class admin_thong_tin_gvController extends Controller
         $sua_giang_vien->email=$request->email;
         $sua_giang_vien->phone_number=$request->sdt;
 
-        $request->bomon = BoMon::where('ten_bo_mon',$request->bomon)->value('id');
+        $request->bomon = BoMon::where('ten_bo_mon_viet_tat',$request->bomon)->value('id');
         $sua_giang_vien->id_bo_mon=$request->bomon;
 
         $sua_giang_vien->note=$request->ghichu;
@@ -124,7 +116,7 @@ class admin_thong_tin_gvController extends Controller
         $sua_giang_vien->save();
         $sua_user->save();
 
-        return redirect('admin/danh_sach_giang_vien/sua_gv/'.$request->mgv)->with('success','BẠN ĐÃ SỬA THÀNH CÔNG');
+        return redirect('admin/danh_sach_giang_vien')->with('success','BẠN ĐÃ SỬA THÀNH CÔNG');
 
         
     }
@@ -143,7 +135,7 @@ class admin_thong_tin_gvController extends Controller
         $giangvienb->delete();
        
        // return redirect('admin/danhsachsinhvien/danh_sach_sinh_vien');
-        return redirect('admin/danh_sach_giang_vien'); 
+        return redirect('admin/danh_sach_giang_vien')->with('success','BẠN ĐÃ XÓA THÀNH CÔNG');; 
     }
 
     public function getloc($id){

@@ -12,6 +12,7 @@ use App\GiangVien;
 use App\LoaiDoAn;
 use Response;
 use App\NguyenVongDoAn;
+use Illuminate\Support\collection;
 class home_adminController extends Controller
 {
 
@@ -20,7 +21,10 @@ class home_adminController extends Controller
         $admin= Admin::where('user_name',$a)->first();
         $bomon=BoMon::all();
         $loaidoan=LoaiDoAn::all();
-        $do_an=DoAn::paginate(5);
+        $do_an = DoAn::paginate(5);
+        //$do=$collection->sortByDesc('id');
+       // $do_an=$collection->paginate(5);
+       // echo $do_an;
 //dem ban ghi
         $dem=NguyenVongDoAn::all()->count();
         
@@ -46,7 +50,7 @@ class home_adminController extends Controller
         
         }
         
-        return view('admin.do_an.phan_cong_do_an',['bomon'=>$bomon,'do_an'=>$do_an,'admin'=>$admin,'loaidoan'=>$loaidoan,'dem'=>$dem]);
+       return view('admin.do_an.phan_cong_do_an',['bomon'=>$bomon,'do_an'=>$do_an,'admin'=>$admin,'loaidoan'=>$loaidoan,'dem'=>$dem]);
     }
 
     public function getthemda(){
@@ -155,7 +159,7 @@ class home_adminController extends Controller
 	        $do_an_a =DoAn::where('id',$id)->first();
 	        $do_an_a->delete();
 	       // return redirect('admin/danhsachsinhvien/danh_sach_sinh_vien');
-	        return redirect('/admin/home_admin'); 
+	        return redirect('/admin/home_admin')->with('success','BẠN ĐÃ XÓA THÀNH CÔNG');; 
 	    }
 
     public function file(Request $request, $id){
@@ -183,7 +187,7 @@ class home_adminController extends Controller
     }
 
     public function getDownload(Request $request,$id){
-         $dowload_file=DoAn::where('id',$id)->value('file_bao_cao');
+        $dowload_file=DoAn::where('id',$id)->value('file_bao_cao');
         $file="upload/$dowload_file";
         return Response::download($file);
 }

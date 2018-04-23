@@ -78,7 +78,7 @@
 </div>
         <div class="panel-footer" style="width: 960px">
           <div class="row">
-            <div class="col col-xs-4">Trang 1 của 5 </div>
+            <div class="col col-xs-4"></div>
             <div class="col col-xs-8">
               <ul class="pagination hidden-xs pull-right">
                {!!$admina->links()!!}

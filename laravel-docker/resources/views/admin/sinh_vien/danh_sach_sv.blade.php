@@ -25,7 +25,7 @@
       <h3 style="text-align:center">Danh Sách Sinh Viên  </h3>
       <div class="form-group">
                             
-                            <li class="dropdown">
+                            <li class="dropdown" style="list-style-type: none;">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                  Lọc theo bộ môn
                                 <span class="caret"> </span></a>                      

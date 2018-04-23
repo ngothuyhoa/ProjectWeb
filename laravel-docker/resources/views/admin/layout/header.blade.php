@@ -67,9 +67,8 @@
                 <li class="login" style="margin-right: 10px;float: right;">
                
                   <ul class="nav navbar-nav">
-                    <p></p><br>
-                    <p></p>
-                    <li> <a href="/admin/duyet_do_an">Notification <span class="badge" style="background: red">{{$dem}}</span></a></li>
+                    
+                    <li> <a href="/admin/duyet_do_an">Duyệt Đồ Án <span class="badge" style="background: red">{{$dem}}</span></a></li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                          <img src="/admin_acsset/bootstrap/image/user_1.png">  {{$admin->full_name}}
@@ -106,7 +105,7 @@
         <form method="post" role="form" action="{{ url('admin/search') }}" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{csrf_token()}}"> 
         <div class="input-group col-lg-6">
-            <input type="text" class="form-control" placeholder="Nhap MSV or MGV" name="search">
+            <input type="text" class="form-control" placeholder="Search for" name="search">
             <span class="input-group-btn">
                
                 <input class="btn btn-secondary" type="submit" name="" value="Go"/>

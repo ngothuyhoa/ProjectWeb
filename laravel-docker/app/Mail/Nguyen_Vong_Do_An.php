@@ -28,6 +28,6 @@ class Nguyen_Vong_Do_An extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.reminder');
+        return $this->view('mail.duyet_nguyen_vong');
     }
 }

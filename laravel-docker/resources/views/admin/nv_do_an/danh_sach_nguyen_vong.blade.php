@@ -33,7 +33,6 @@
                             <td style="text-align:center">Bo Mon</td>
                             <td style="text-align:center">Loại Đồ Án</td>
                             <td style="text-align:center">Học Kỳ</td>
-                            <td style="text-align:center">Trang Thai</td>
                             <td style="text-align:center">Thao tac</td> 
                         </tr>
                     </thead>
@@ -65,14 +64,15 @@
                                  @endforeach
                              </select></td>
                             <td><input type="text" name="hoc_ky" value="{{$nv_da->hoc_ky}}" style="width: 40px ;background: #F8F8FF ;border: 0px"></td>
-                            <td>hih</td>
+                            
                             <td>
                                <form action="/admin/duyet_do_an/{{$nv_da->id}}" method="post">
                          <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="submit" name="duyet" value="Duyệt">
                                 {{ csrf_field() }}
                               </form>
-                              <form>
+                              <form action="/admin/huy_do_an/{{$nv_da->id}}" method="post">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                               <input type="submit" name="huy" value="Hủy" style="margin-top: 10px">
                               </form>
                               

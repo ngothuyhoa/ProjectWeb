@@ -23,7 +23,7 @@
 	});
 
 	Route::group(['middleware'=>['web']],function(){
-		Route::post('admin/login','loginController@login');});
+		Route::post('login','loginController@login');});
 	Route::get('logout','loginController@logout');
 
 
@@ -44,9 +44,9 @@
 	Route::post('admin/danh_sach_giang_vien','admin_thong_tin_gvController@postdsgv');
 	Route::post('admin/danh_sach_giang_vien/them_gv','admin_thong_tin_gvController@themgv');
 	Route::post('admin/danh_sach_giang_vien/them','admin_thong_tin_gvController@them');
-	Route::get('admin/danh_sach_giang_vien/sua_gv/{user_name}','admin_thong_tin_gvController@suagv');
+	//Route::get('admin/danh_sach_giang_vien/sua_gv/{user_name}','admin_thong_tin_gvController@suagv');
 	Route::post('admin/danh_sach_giang_vien/sua/{user_name}','admin_thong_tin_gvController@sua');
-	Route::get('admin/danh_sach_giang_vien/xoa_gv/{user_name}','admin_thong_tin_gvController@xoagv');
+	Route::post('admin/danh_sach_giang_vien/xoa_gv/{user_name}','admin_thong_tin_gvController@xoagv');
 	Route::get('admin/danh_sach_giang_vien/loc_sinh_vien/{id}','admin_thong_tin_gvController@getloc');
 	Route::post('admin/danh_sach_giang_vien/loc_sinh_vien/{id}','admin_thong_tin_gvController@loc');
 
@@ -71,6 +71,7 @@
 	Route::post('admin/them_do_an','home_adminController@themda');
 	Route::post('admin/them','home_adminController@them');
 	Route::post('admin/sua_da/{id}','home_adminController@suada');	
+	Route::post('admin/xoa_da/{id}','home_adminController@xoada');	
 	Route::get('admin/file_bao_cao/{id}','home_adminController@file');
 	Route::post('admin/file_bao_cao/sua/{id}','home_adminController@sua_file');
 	Route::get('download/{id}','home_adminController@getDownload');
@@ -99,6 +100,7 @@ Route::post('file','home_adminController@doUpload');
 //Duyet do an
 Route::get('admin/duyet_do_an','admin_nguyen_vong_do_anController@duyetnv');
 Route::post('admin/duyet_do_an/{id}','admin_nguyen_vong_do_anController@duyet');
+Route::post('admin/huy_do_an/{id}','admin_nguyen_vong_do_anController@huy');
 
 // Dang nhap cho giang vien
 	Route:: get('giangvien/home_giangvien','home_giangvienController@dssv');
@@ -106,5 +108,49 @@ Route::post('admin/duyet_do_an/{id}','admin_nguyen_vong_do_anController@duyet');
 	Route::get('giangvien/file_bao_cao/{id}','home_giangvienController@file');
 	Route::get('download/{id}','home_giangvienController@getDownload');
 
-// test 
-	Route::get('gui_mail','admin_nguyen_vong_do_anController@mail');
+//Home_page
+	Route::get('home_page',function(){
+		return view('home_page.home_page');
+	});
+
+//tan
+	
+Route::get('home_student', 'StudentController@homeStudent')->name('home_student');
+
+Route::get('aspiration_project', function(){
+	return view('pages.aspiration_project');
+})->name('aspiration_project');
+
+Route::get('logout','loginController@logout');
+
+Route::post('change_password_student', 'StudentController@changePassword')->name('change_password_student');
+
+Route::post('check_old_password_student', 'StudentController@checkOldPassword')->name('check_old_password');
+
+Route::post('update_password_student', 'StudentController@updatePassword')->name('update_password_student');
+
+Route::post('update_information_private_student', 'StudentController@updateInformationPrivate')->name('update_information_private_student');
+
+Route::get('project_refer_home_student','StudentController@getprojectRefer')->name('project_refer_home_student');
+Route::post('project_refer_home_student','StudentController@projectRefer')->name('project_refer_home_student');
+
+Route::post('project_refer_home_teacher','StudentController@projectRefer')->name('project_referhome_teacher');
+
+Route::get('home_teacher')->name('home_teacher');
+
+Route::get('update_score','TeacherController@updateScore')->name('update_score');
+
+Route::get('home_teacher', 'TeacherController@homeTeacher')->name('home_teacher');
+
+Route::get('save_score_by_teacher', 'TeacherController@saveScore')->name('save_score_by_teacher');
+
+Route::post('check_old_password_teacher', 'TeacherController@checkOldPassword')->name('check_old_password_teacher');
+
+Route::post('change_password_teacher', 'TeacherController@changePassword')->name('change_password_teacher');
+
+Route::post('update_password_teacher', 'TeacherController@updatePassword')->name('update_password_teacher');
+
+Route::post('update_information_private_teacher', 'TeacherController@updateInformationPrivate')->name('update_information_private_teacher');
+
+Route::post('controller_search_home_student', 'StudentController@search')->name('controller_search_home_student');
+Route::post('controller_search_home_teacher', 'TeacherController@search')->name('controller_search_home_teacher');

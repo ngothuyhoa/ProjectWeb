@@ -13,4 +13,7 @@ class SinhVien extends Model
     public function bomon(){
     	return $this->belongsTo('bo_mon','id_bo_mon','id');
     }
+     public function sinh_vien_to_do_an(){
+    	return $this->hasMany('App\DoAn','id_sinh_vien','id');
+    }
 }

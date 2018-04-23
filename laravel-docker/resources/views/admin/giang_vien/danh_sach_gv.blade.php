@@ -1,5 +1,18 @@
 @extends('admin.layout.home_admin')
 @section('content')
+<?
+                      function checked($value, $v_compare){
+                          $rs='';
+                          if($value==$v_compare)
+                             $rs ='selected="selected"';
+                          return $rs;
+                                        }
+                    ?>
+                     @if (session('success'))
+                           <div class="alert alert-success" style="text-align: center;">
+                              <p>{{ session('success') }}</p>
+                           </div>
+                      @endif 
 <div class="panel-footer" style="width: 960px ;margin-right: 10px" >
       <h3 style="text-align:center">Danh Sách Giảng Viên  </h3>
        <div class="form-group">
@@ -49,18 +62,34 @@
                         <?php $i=0; ?>
 
                         @foreach($giangvien as $gv)
+                        <form action="/admin/danh_sach_giang_vien/sua/{{$gv->user_name}}" method="post">
+                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <tr>
                             <td><?php echo ++$i; ?></td>
-                            <td>{{$gv->user_name}}</td>
-                            <td>{{$gv->full_name}}</td>
-                            <td>{{$gv->birthday}}</td>
-                            <td>{{$gv->gender}}</td>
-                            <td>{{$gv->phone_number}}</td>
-                            <td>{{$gv->email}}</td>
-                            <td>{{$gv->tenbomon}}</td>
-                            <td>{{$gv->note}}</td>
+                            <td><input type="text" name="mgv" value="{{$gv->user_name}}" style="width: 50px ;background: #F8F8FF ;border: 0px"></td>
+                            <td><textarea style="width: 80px;background: #F8F8FF ;border: 0px;text-align: center;" name="ten"> {{$gv->full_name}}</textarea></td>
+                            <td><textarea style="width: 60px;background: #F8F8FF ;border: 0px;text-align: center;" name="ngaysinh"> {{$gv->birthday}}</textarea></td>
+                            <td><select  name="gioitinh" style="width: 50px ;background: #F8F8FF ;border: 0px">
+                                <option value="Nam" <?php echo checked('Nam',$gv->gender)?>>Nam</option>
+                                <option value="Nữ" <?php echo checked('Nữ',$gv->gender)?>>Nữ</option>
+                                <option value="Khác"<?php echo checked('Khác',$gv->gender)?>>Khác</option>
+                              </select></td>
+                            <td><textarea style="width: 50px;background: #F8F8FF ;border: 0px;text-align: center;" name="sdt">{{$gv->phone_number}}</textarea></td>
+                            <td><textarea style="width: 60px;background: #F8F8FF ;border: 0px;text-align: center;" name="email"> {{$gv->email}}</textarea></td>
+                            <td><select  id="" class="form-control" name="bomon" style="width:70px;background: #F8F8FF ;border: 0px ;padding-left: 0px;margin-left: 0px" >
+                                    @foreach($bomon as $bm)
+                                     <option <?php echo checked($bm->ten_bo_mon_viet_tat,$gv->ten_viet_tat); ?>>{{$bm->ten_bo_mon_viet_tat}}</option>
+                                 @endforeach
+                             </select></td>
+                            <td><textarea style="width: 60px;background: #F8F8FF ;border: 0px;text-align: center;" name="ghichu">{{$gv->note}}</textarea></td>
                             
-                            <td><a href="/admin/danh_sach_giang_vien/sua_gv/{{$gv->user_name}}"> Sửa</a> <a href="/admin/danh_sach_giang_vien/xoa_gv/{{$gv->user_name}}">Xóa </a> </td>
+                            <td>
+                                <input type="submit" name="" value="Sửa">
+                              </form>
+                               <form action="/admin/danh_sach_giang_vien/xoa_gv/{{$gv->user_name}}" method="post">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input style="margin-top: 10px" type="submit" name="" value="Xoa">
+                              </form> </td>
                            
                         </tr>
                         @endforeach

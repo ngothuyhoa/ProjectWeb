@@ -13,6 +13,7 @@ use App\GiangVien;
 use App\LoaiDoAn;
 use Response;
 use App\NguyenVongDoAn;
+use App\Mail\Huy_Do_An;
 
 class admin_nguyen_vong_do_anController extends Controller
 {
@@ -72,14 +73,26 @@ class admin_nguyen_vong_do_anController extends Controller
         //gui mail
         $mail=$email;
         Mail::to($mail)->send(new Nguyen_Vong_Do_An);
-       	return redirect('admin/duyet_do_an')->with('success','BẠN ĐÃ DUYET THÀNH CÔNG');
+       	return redirect('admin/duyet_do_an')->with('success','BẠN ĐÃ DUYỆT THÀNH CÔNG');
 
 
     }
+    public function huy($id){
+        $a= Session::get('ten');
+        $admin= Admin::where('user_name',$a)->first();
+        $bomon=BoMon::all();
+        $loaidoan=LoaiDoAn::all();
+        $nv_do_an=NguyenVongDoAn::find($id);
+        $dem=NguyenVongDoAn::all()->count();
+        //lay ra dia chi mail cua sinh vien;
+        $email=SinhVien::find($nv_do_an->id_sinh_vien)->email;
+        $nv_do_an->delete();
+        //gui mail
+        $mail=$email;
+        Mail::to($mail)->send(new Huy_Do_An);
+        return redirect('admin/duyet_do_an')->with('success','BẠN ĐÃ HỦY THÀNH CÔNG');
 
-    public function mail(){
-        $mail='20155615@student.hust.edu.vn';
-        Mail::to($mail)->send(new Nguyen_Vong_Do_An);
-        dd('mail send successfully');
+
     }
+    
 }

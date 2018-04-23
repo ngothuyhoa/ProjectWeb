@@ -24,7 +24,7 @@
 </head>
 
 
-<body style="background-color:#20B2AA">
+<body style="background-color:#732626">
         @include('admin.layout.header')
         
 

@@ -42,15 +42,15 @@
                             <td style="text-align:center">Thao tac</td> 
                         </tr>
                     </thead>
-                    <?php $i=0;?>
+                    <?php $i=1;?>
 
                     @foreach($do_an as $da)
                      <form action="/admin/sua_da/{{$da->id}}" method="post">
                          <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <tr>
-                            <td><?php echo ++$i;?></td>
+                            <td>{{$da->id}}</td>
                              <td> {{$da->ten}}</td>
-                             <td><input type="text" name="msv" value="{{$da->ma_sv}}" style="width: 50px ;background: #F8F8FF ;border: 0px"></td>
+                             <td><input type="text" name="msv" value="{{$da->ma_sv}}" style="width: 40px ;background: #F8F8FF ;border: 0px"></td>
                             <td>{{$da->lop}}</td>
                             <td>{{$da->khoa}}</td>
                             <td>
@@ -60,7 +60,7 @@
                              
                             </td>
                             <td>{{$da->gvhd}}</td>
-                            <td><input type="text" name="mgv" value="{{$da->ma_gv}}" style="width: 50px ;background: #F8F8FF ;border: 0px"></td>
+                            <td><input type="text" name="mgv" value="{{$da->ma_gv}}" style="width: 40px ;background: #F8F8FF ;border: 0px"></td>
                             <td><select  id="" name="bomon" style="width:55px;background: #F8F8FF ;border: 0px ;padding: 0px;margin-top: 0px" >
                                     @foreach($bomon as $bm)
                                      <option <?php echo checked($bm->ten_bo_mon_viet_tat,$da->ten_viet_tat); ?>>{{$bm->ten_bo_mon_viet_tat}}</option>

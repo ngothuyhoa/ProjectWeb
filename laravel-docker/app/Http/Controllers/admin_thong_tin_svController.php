@@ -15,7 +15,8 @@ class admin_thong_tin_svController extends Controller
 {
 
 public function dssv(){
-    $dem=NguyenVongDoAn::all()->count();
+       
+        $dem=NguyenVongDoAn::all()->count();
         $a= Session::get('ten');
         $admin= Admin::where('user_name',$a)->first();
         $loaidoan=LoaiDoAn::all();
@@ -76,13 +77,14 @@ public function dssv(){
         $this->validate($request,
             [
                 'msv'=>'|max:10|unique:sinh_vien,user_name',
-                'sdt'=>'|max:15|',
+                'sdt'=>'|max:15|unique:sinh_vien,phone_number',
                 'email'=>'|email|',
             ],
             [
                 'msv.max'=>'MSV KHÔNG ĐƯỢC VƯỢT QUÁ 10 KÝ TỰ',
-                'msv.unique'=>'MÃ ĐÃ TỒN TẠI',
+                'msv.unique'=>'MÃ SV ĐÃ TỒN TẠI',
                 'sdt.max'=>'SDT KHÔNG ĐƯỢC VƯỢT QUÁ 15 KÝ TỰ',
+                'sdt.unique'=>'SDT ĐÃ TỒN TẠI',
                 'email.email'=>'NHẬP SAI EMAIL',
             ]
         );
@@ -172,7 +174,7 @@ public function dssv(){
         $users->delete();
         $sinhvienb->delete();
        // return redirect('admin/danhsachsinhvien/danh_sach_sinh_vien');
-        return redirect('admin/danh_sach_sinh_vien')->with('success','BẠN ĐÃ XÓA THÀNH CÔNG');;
+        return redirect('admin/danh_sach_sinh_vien')->with('success','BẠN ĐÃ XÓA THÀNH CÔNG');
     }
 
     public function getloc($id){
